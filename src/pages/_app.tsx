@@ -1,8 +1,32 @@
+import React from "react"
+import "@mantine/core/styles.css"
+import "src/styles/globals.css"
+
 import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
-import React from "react"
 import { withBlitz } from "src/blitz-client"
-import 'src/styles/globals.css'
+import { MantineColorsTuple, MantineProvider, createTheme } from "@mantine/core"
+
+import "src/core/styles/index.css"
+
+const myColors: MantineColorsTuple = [
+  "#fff8e1",
+  "#ffefcc",
+  "#ffdd9b",
+  "#ffca64",
+  "#ffba38",
+  "#ffb01b",
+  "#ffab09",
+  "#e39500",
+  "#ca8500",
+  "#af7100",
+]
+
+const theme = createTheme({
+  colors: {
+    myColors,
+  },
+})
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -27,9 +51,11 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
-    <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      {getLayout(<Component {...pageProps} />)}
-    </ErrorBoundary>
+    <MantineProvider theme={theme}>
+      <ErrorBoundary FallbackComponent={RootErrorFallback}>
+        {getLayout(<Component {...pageProps} />)}
+      </ErrorBoundary>
+    </MantineProvider>
   )
 }
 
