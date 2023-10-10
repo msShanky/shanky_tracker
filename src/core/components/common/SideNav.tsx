@@ -3,14 +3,16 @@ import Link from "next/link"
 
 const sideNavMenuItems = [
   {
+    label: "Home",
+    pageLink: "/",
+  },
+  {
     label: "Finance",
     pageLink: "/finance",
-    icon: "💰",
   },
   {
     label: "Tracker",
     pageLink: "/tracker",
-    icon: "📊",
   },
 ]
 

@@ -2,7 +2,7 @@ import Head from "next/head"
 import React from "react"
 import { BlitzLayout } from "@blitzjs/next"
 import { useDisclosure } from "@mantine/hooks"
-import { AppShell, Burger, Group, Skeleton } from "@mantine/core"
+import { AppShell, Burger, Group } from "@mantine/core"
 import { SideNav } from "@components/common"
 
 type BlitzLayoutProps = { title?: string; children?: React.ReactNode }
@@ -28,11 +28,14 @@ const Layout: BlitzLayout<BlitzLayoutProps> = (props) => {
         padding="md"
         withBorder={false}
       >
-        <AppShell.Header>
-          <Group className="bg-yellow-400" h="100%" px="md">
+        <AppShell.Header className="flex w-full justify-between bg-yellow-400 items-center">
+          <Group className="" h="100%" px="md">
             <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
             <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="md" />
           </Group>
+          <div>
+            <a href="/api/auth/google/login">Log In Google</a>
+          </div>
         </AppShell.Header>
         <AppShell.Navbar className="bg-yellow-400 border-yellow-400" p="md">
           <SideNav />

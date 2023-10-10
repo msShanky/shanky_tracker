@@ -58,31 +58,9 @@ const UserInfo = () => {
 const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
-      <div className={styles.globe} />
-
-      <div className="flex flex-col h-screen">
-        <div className="border-yellow-400 py-4 bg-gradient-to-b from-yellow-400 to-yellow-500 text-black text-center">
-          <p>
-            <strong>Congrats!</strong> Your app is ready, including user sign-up and log-in.
-          </p>
-        </div>
-
-        <main className={styles.main}>
-          <Title>This is a title</Title>
-        </main>
-
-        {/* <footer className={styles.footer}>
-          <span>Powered by</span>
-          <a
-            href="https://blitzjs.com?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.textLink}
-          >
-            Blitz.js
-          </a>
-        </footer> */}
-      </div>
+      <main className="">
+        <Title>This is a title</Title>
+      </main>
     </Layout>
   )
 }
