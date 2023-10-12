@@ -146,12 +146,13 @@ model Tracker {
 
 // Would track the daily entries from the UI
 model TrackerEntry {
-  id        Int      @id @default(autoincrement())
-  trackerId Int      @map("tracking_id")
-  tracker   Tracker  @relation(fields: [trackerId], references: [id])
-  unit      Int
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  id            Int      @id @default(autoincrement())
+  trackerId     Int      @map("tracking_id")
+  tracker       Tracker  @relation(fields: [trackerId], references: [id])
+  unit          Int
+  entryDateTime DateTime
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at")
 
   @@map("tracker_entry")
 }
