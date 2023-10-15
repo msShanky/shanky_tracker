@@ -24,10 +24,11 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
+        <label {...labelProps} className="flex flex-col items-start text-base">
           {label}
           <input
             disabled={isSubmitting}
+            className="px-1 py-2 mt-2 text-base border rounded-md appearance-none border-stone-700"
             {...register(name, {
               valueAsNumber: type ? type === "number" && true : false,
             })}
@@ -44,26 +45,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
           errors={errors}
           name={name}
         />
-
-        <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style>
       </div>
     )
   }
 )
-
-export default LabeledTextField

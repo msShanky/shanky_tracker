@@ -25,6 +25,8 @@ export const EditTrackerEntry = () => {
   )
   const [updateTrackerEntryMutation] = useMutation(updateTrackerEntry)
 
+  console.log("The tracker entry for editing", trackerEntry)
+
   return (
     <>
       <Head>

@@ -1,6 +1,7 @@
-import React from "react"
 import "@mantine/core/styles.css"
-import "src/styles/globals.css"
+import "@mantine/dates/styles.css"
+// import "src/styles/globals.css"
+import React from "react"
 
 import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"

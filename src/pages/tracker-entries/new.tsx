@@ -3,7 +3,10 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useMutation } from "@blitzjs/rpc"
 import Layout from "src/core/layouts/Layout"
-import { CreateTrackerEntrySchema } from "src/trackers/tracker-entries/schemas"
+import {
+  CreateTrackerEntryFormSchema,
+  CreateTrackerEntrySchema,
+} from "src/trackers/tracker-entries/schemas"
 import createTrackerEntry from "src/trackers/tracker-entries/mutations/createTrackerEntry"
 import { TrackerEntryForm, FORM_ERROR } from "src/tracker-entries/components/TrackerEntryForm"
 import { Suspense } from "react"
@@ -18,11 +21,21 @@ const NewTrackerEntryPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <TrackerEntryForm
           submitText="Create TrackerEntry"
-          schema={CreateTrackerEntrySchema}
-          // initialValues={{}}
+          schema={CreateTrackerEntryFormSchema}
+          initialValues={{
+            unit: 1,
+            entryDateTime: new Date(),
+          }}
           onSubmit={async (values) => {
+            const { trackerId, unit, entryDateTime } = values
+            const postBody = {
+              trackerId: parseInt(trackerId),
+              unit: unit ?? 1,
+              entryDateTime: entryDateTime ?? new Date(),
+            }
+
             try {
-              const trackerEntry = await createTrackerEntryMutation(values)
+              const trackerEntry = await createTrackerEntryMutation(postBody)
               await router.push(Routes.ShowTrackerEntryPage({ trackerEntryId: trackerEntry.id }))
             } catch (error: any) {
               console.error(error)

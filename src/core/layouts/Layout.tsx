@@ -28,7 +28,7 @@ const Layout: BlitzLayout<BlitzLayoutProps> = (props) => {
         padding="md"
         withBorder={false}
       >
-        <AppShell.Header className="flex w-full justify-between bg-yellow-400 items-center">
+        <AppShell.Header className="flex items-center justify-between w-full bg-yellow-200">
           <Group className="" h="100%" px="md">
             <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
             <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="md" />
@@ -37,7 +37,7 @@ const Layout: BlitzLayout<BlitzLayoutProps> = (props) => {
             <a href="/api/auth/google/login">Log In Google</a>
           </div>
         </AppShell.Header>
-        <AppShell.Navbar className="bg-yellow-400 border-yellow-400" p="md">
+        <AppShell.Navbar className="bg-yellow-200 border-yellow-400" p="md">
           <SideNav />
         </AppShell.Navbar>
         <AppShell.Main>{children}</AppShell.Main>

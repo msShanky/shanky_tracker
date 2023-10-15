@@ -100,6 +100,8 @@ model TagMapping {
   bankTransaction      BankTransaction?    @relation(fields: [bankTransactionId], references: [id])
   createdAt            DateTime            @default(now()) @map("created_at")
   updatedAt            DateTime            @default(now()) @updatedAt @map("updated_at")
+
+  @@map("tag_mapping")
 }
 
 // Mode of transaction would be seperate (card and upi or bank payment)

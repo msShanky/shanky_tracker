@@ -1,10 +1,10 @@
 import React, { Suspense } from "react"
-import { Form, FormProps } from "src/core/components/Form"
-import { LabeledTextField } from "src/core/components/LabeledTextField"
+import { Form, FormProps } from "@components/form/Form"
+import { LabeledTextField } from "@components/form/LabeledTextField"
 import { useForm } from "react-hook-form"
 
 import { z } from "zod"
-export { FORM_ERROR } from "src/core/components/Form"
+export { FORM_ERROR } from "@components/form/Form"
 
 export function TrackingGoalForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   const { register } = useForm()

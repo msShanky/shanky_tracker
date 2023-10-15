@@ -6,6 +6,8 @@ import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
 import Layout from "src/core/layouts/Layout"
 import getTrackers from "src/trackers/queries/getTrackers"
+import { ActionIcon, Button, Table } from "@mantine/core"
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 
 const ITEMS_PER_PAGE = 100
 
@@ -21,22 +23,57 @@ export const TrackersList = () => {
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
+  const rows = trackers.map((tracker) => {
+    return (
+      <Table.Tr key={tracker.id}>
+        <Table.Td>{tracker.id}</Table.Td>
+        <Table.Td>{tracker.name}</Table.Td>
+        <Table.Td>{tracker.baseUnit}</Table.Td>
+        <Table.Td>{tracker.description}</Table.Td>
+        <Table.Td>{tracker.objective}</Table.Td>
+        <Table.Td>{tracker.progress}</Table.Td>
+        <Table.Td>{tracker.createdAt.toLocaleString()}</Table.Td>
+        <Table.Td>
+          <Link href={Routes.ShowTrackerPage({ trackerId: tracker.id })}>
+            <ActionIcon className="flex items-center justify-center bg-black w-max">
+              <ArrowTopRightOnSquareIcon className="w-5 h-5 stroke-yellow-200 fill-transparent" />
+            </ActionIcon>
+          </Link>
+        </Table.Td>
+      </Table.Tr>
+    )
+  })
+
   return (
     <div>
-      <ul>
-        {trackers.map((tracker) => (
-          <li key={tracker.id}>
-            <Link href={Routes.ShowTrackerPage({ trackerId: tracker.id })}>{tracker.name}</Link>
-          </li>
-        ))}
-      </ul>
+      <Table className="my-10">
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Tracker ID</Table.Th>
+            <Table.Th>Name</Table.Th>
+            <Table.Th>Base Unit</Table.Th>
+            <Table.Th>Description</Table.Th>
+            <Table.Th>Objective</Table.Th>
+            <Table.Th>Progress</Table.Th>
+            <Table.Th>Created At</Table.Th>
+            <Table.Th>Actions</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>{rows}</Table.Tbody>
+      </Table>
 
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
+      <div className="fixed flex w-full gap-4 bottom-28">
+        <Button
+          disabled={page === 0}
+          onClick={goToPreviousPage}
+          className="text-black bg-yellow-200"
+        >
+          Previous
+        </Button>
+        <Button disabled={!hasMore} onClick={goToNextPage} className="text-black bg-yellow-200">
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
@@ -47,12 +84,16 @@ const TrackersPage = () => {
       <Head>
         <title>Trackers</title>
       </Head>
-
       <div>
-        <p>
-          <Link href={Routes.NewTrackerPage()}>Create Tracker</Link>
-        </p>
-
+        {/* Button Tray */}
+        <div className="flex gap-4 my-4">
+          <Button className="text-black bg-yellow-200">
+            <Link href={Routes.Tracker()}>Back</Link>
+          </Button>
+          <Button className="text-black bg-yellow-200">
+            <Link href={Routes.NewTrackerPage()}>Create Tracker</Link>
+          </Button>
+        </div>
         <Suspense fallback={<div>Loading...</div>}>
           <TrackersList />
         </Suspense>

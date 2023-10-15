@@ -69,7 +69,7 @@ export function Form<S extends z.ZodType<any, any>>({
           <Button
             type="submit"
             disabled={ctx.formState.isSubmitting}
-            className="text-black bg-yellow-400"
+            className="text-black bg-yellow-300"
           >
             {submitText}
           </Button>
@@ -84,5 +84,3 @@ export function Form<S extends z.ZodType<any, any>>({
     </FormProvider>
   )
 }
-
-export default Form
